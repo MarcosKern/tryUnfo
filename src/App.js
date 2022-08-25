@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './components/Form';
 import Card from './components/Card';
+import Delete from './components/Delete';
 
 class App extends React.Component {
   state = {
@@ -19,12 +20,18 @@ class App extends React.Component {
   };
 
   deckHasTrunfo = () => {
-    const { deck: trunfo } = this.state;
-    const hasTrunfoInDeck = trunfo.some((value) => value.trunfo === true);
+    const { deck } = this.state;
+    const hasTrunfoInDeck = deck.some((value) => value.trunfo === true);
     if (hasTrunfoInDeck === true) {
-      this.setState({ hasTrunfo: true });
+      this.setState({
+        hasTrunfo: true,
+        isTrunfo: false,
+      });
     } else {
-      this.setState({ hasTrunfo: false });
+      this.setState({
+        hasTrunfo: false,
+        isTrunfo: false,
+      });
     }
   };
 
@@ -113,6 +120,13 @@ class App extends React.Component {
     this.deckHasTrunfo();
   };
 
+  excludeItem = (event) => {
+    const { deck } = this.state;
+    const { target: { name } } = event;
+    const newArray = deck.filter((card) => card.nome !== name);
+    this.setState({ deck: newArray }, () => this.deckHasTrunfo());
+  };
+
   render() {
     const {
       cardName,
@@ -162,7 +176,7 @@ class App extends React.Component {
         <ul>
           {
             deck.map((card) => (
-              <li key={ card.name }>
+              <li key={ card.nome }>
                 <Card
                   cardName={ card.nome }
                   cardDescription={ card.descricao }
@@ -172,6 +186,10 @@ class App extends React.Component {
                   cardImage={ card.imagem }
                   cardRare={ card.raridade }
                   cardTrunfo={ card.trunfo }
+                />
+                <Delete
+                  deleteCard={ card.nome }
+                  click={ this.excludeItem }
                 />
               </li>
             ))
