@@ -12,9 +12,20 @@ class App extends React.Component {
     rariti: '',
     cardImage: '',
     isTrunfo: false,
+    hasTrunfo: false,
     isSaveButtonDisabled: true,
     maxAttr: 210,
     deck: [],
+  };
+
+  deckHasTrunfo = () => {
+    const { deck: trunfo } = this.state;
+    const hasTrunfoInDeck = trunfo.some((value) => value.trunfo === true);
+    if (hasTrunfoInDeck === true) {
+      this.setState({ hasTrunfo: true });
+    } else {
+      this.setState({ hasTrunfo: false });
+    }
   };
 
   handleEvent = async (event) => {
@@ -99,6 +110,7 @@ class App extends React.Component {
       rariti: '',
       cardImage: '',
     });
+    this.deckHasTrunfo();
   };
 
   render() {
@@ -109,9 +121,11 @@ class App extends React.Component {
       attr2,
       attr3,
       rariti,
+      hasTrunfo,
       cardImage,
       isTrunfo,
       isSaveButtonDisabled,
+      deck,
     } = this.state;
 
     return (
@@ -127,7 +141,7 @@ class App extends React.Component {
             cardImage={ cardImage }
             cardRare={ rariti }
             cardTrunfo={ isTrunfo }
-            hasTrunfo=""
+            hasTrunfo={ hasTrunfo }
             isSaveButtonDisabled={ isSaveButtonDisabled }
             onInputChange={ this.handleEvent }
             onSaveButtonClick={ this.saveButton }
@@ -145,6 +159,24 @@ class App extends React.Component {
             />
           </div>
         </section>
+        <ul>
+          {
+            deck.map((card) => (
+              <li key={ card.name }>
+                <Card
+                  cardName={ card.nome }
+                  cardDescription={ card.descricao }
+                  cardAttr1={ card.atributo1 }
+                  cardAttr2={ card.atributo2 }
+                  cardAttr3={ card.atributo3 }
+                  cardImage={ card.imagem }
+                  cardRare={ card.raridade }
+                  cardTrunfo={ card.trunfo }
+                />
+              </li>
+            ))
+          }
+        </ul>
       </div>
     );
   }
