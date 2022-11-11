@@ -1,0 +1,14 @@
+.delete {
+  height: 30px;
+  width: 120px;
+  background-color: #0005;
+  border: none;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: .2s linear;
+}
+
+.delete:hover {
+  cursor: pointer;
+  background-color: #0009;
+}

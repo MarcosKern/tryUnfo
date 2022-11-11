@@ -1,7 +1,10 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
+import Header from './components/Header';
 import Form from './components/Form';
 import Card from './components/Card';
 import Delete from './components/Delete';
+import './css/mainSection.css';
 
 class App extends React.Component {
   state = {
@@ -10,14 +13,36 @@ class App extends React.Component {
     attr1: '0',
     attr2: '0',
     attr3: '0',
-    rariti: '',
+    rariti: 'Normal',
     cardImage: '',
     isTrunfo: false,
     hasTrunfo: false,
     isSaveButtonDisabled: true,
     maxAttr: 210,
-    deck: [],
+    deck: [
+      {
+        nome: 'Aronguejo',
+        descricao: 'Caranguejo loco corre corre',
+        imagem: 'https://static1-br.millenium.gg/articles/4/85/04/@/110758-rift-scuttler-originalskin-article_cover_bd-1.jpg',
+        atributo1: '0',
+        atributo2: '90',
+        atributo3: '90',
+        raridade: 'Lendaria',
+        trunfo: false,
+      },
+    ],
   };
+
+  mouseOver = (event) => {
+    console.log(event)
+  }
+
+  deleteButton = (cardName) => (
+    <Delete
+      deleteCard={ cardName }
+      click={ this.excludeItem }
+    />
+  );
 
   deckHasTrunfo = () => {
     const { deck } = this.state;
@@ -114,10 +139,11 @@ class App extends React.Component {
       attr1: '0',
       attr2: '0',
       attr3: '0',
-      rariti: '',
+      rariti: 'Normal',
       cardImage: '',
     });
     this.deckHasTrunfo();
+    this.setState({ isSaveButtonDisabled: true });
   };
 
   excludeItem = (event) => {
@@ -143,9 +169,10 @@ class App extends React.Component {
     } = this.state;
 
     return (
-      <div>
-        <h1>Tryunfo</h1>
-        <section>
+      <main>
+        <section
+          className="createCard"
+        >
           <Form
             cardName={ cardName }
             cardDescription={ cardDescription }
@@ -160,42 +187,48 @@ class App extends React.Component {
             onInputChange={ this.handleEvent }
             onSaveButtonClick={ this.saveButton }
           />
-          <div>
-            <Card
-              cardName={ cardName }
-              cardDescription={ cardDescription }
-              cardAttr1={ attr1 }
-              cardAttr2={ attr2 }
-              cardAttr3={ attr3 }
-              cardImage={ cardImage }
-              cardRare={ rariti }
-              cardTrunfo={ isTrunfo }
-            />
+          <div className="preview">
+            <Header />
+            <Route exact path="/preview">
+              <div className="previewShow">
+                <Card
+                  cardName={ cardName }
+                  cardDescription={ cardDescription }
+                  cardAttr1={ attr1 }
+                  cardAttr2={ attr2 }
+                  cardAttr3={ attr3 }
+                  cardImage={ cardImage }
+                  cardRare={ rariti }
+                  cardTrunfo={ isTrunfo }
+                />
+              </div>
+            </Route>
+            <Route exact path="/deck">
+              <ul>
+                {
+                  deck.map((card) => (
+                    <li
+                      key={ card.nome }
+                    >
+                      <Card
+                        cardName={ card.nome }
+                        cardDescription={ card.descricao }
+                        cardAttr1={ card.atributo1 }
+                        cardAttr2={ card.atributo2 }
+                        cardAttr3={ card.atributo3 }
+                        cardImage={ card.imagem }
+                        cardRare={ card.raridade }
+                        cardTrunfo={ card.trunfo }
+                        del={ this.deleteButton(card.nome) }
+                      />
+                    </li>
+                  ))
+                }
+              </ul>
+            </Route>
           </div>
         </section>
-        <ul>
-          {
-            deck.map((card) => (
-              <li key={ card.nome }>
-                <Card
-                  cardName={ card.nome }
-                  cardDescription={ card.descricao }
-                  cardAttr1={ card.atributo1 }
-                  cardAttr2={ card.atributo2 }
-                  cardAttr3={ card.atributo3 }
-                  cardImage={ card.imagem }
-                  cardRare={ card.raridade }
-                  cardTrunfo={ card.trunfo }
-                />
-                <Delete
-                  deleteCard={ card.nome }
-                  click={ this.excludeItem }
-                />
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+      </main>
     );
   }
 }

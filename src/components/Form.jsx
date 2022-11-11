@@ -10,18 +10,27 @@ class Form extends React.Component {
     } = this.props;
     if (hasTrunfo === false) {
       return (
-        <input
-          name="isTrunfo"
-          type="checkbox"
-          data-testid="trunfo-input"
-          checked={ cardTrunfo }
-          onChange={ onInputChange }
-        />
+        <label
+          htmlFor="trunfo"
+          className="trunfo"
+        >
+          <span>
+            This card is a Super Trunfo?
+          </span>
+          <input
+            name="isTrunfo"
+            type="checkbox"
+            id="trunfo"
+            data-testid="trunfo-input"
+            checked={ cardTrunfo }
+            onChange={ onInputChange }
+          />
+        </label>
       );
     }
     return (
-      <p>
-        Você já tem um Super Trunfo em seu baralho
+      <p className="trunfo">
+        Your deck already have a SuperTrunfo
       </p>
     );
   };
@@ -41,6 +50,7 @@ class Form extends React.Component {
     } = this.props;
     return (
       <form action="">
+        <h1>Tryunfo</h1>
         <input
           type="text"
           name="cardName"
@@ -48,63 +58,83 @@ class Form extends React.Component {
           data-testid="name-input"
           value={ cardName }
           onChange={ onInputChange }
+          placeholder="Card name"
+          maxLength="12"
         />
         <textarea
           name="cardDescription"
           id=""
-          cols="30"
-          rows="10"
+          cols="25"
+          rows="5"
           data-testid="description-input"
           value={ cardDescription }
           onChange={ onInputChange }
+          placeholder="Card description"
+          maxLength="100"
         />
-        <input
-          type="number"
-          name="attr1"
-          min="0"
-          max="90"
-          id=""
-          data-testid="attr1-input"
-          value={ cardAttr1 }
-          onChange={ onInputChange }
-        />
-        <input
-          type="number"
-          name="attr2"
-          min="0"
-          max="90"
-          id=""
-          data-testid="attr2-input"
-          value={ cardAttr2 }
-          onChange={ onInputChange }
-        />
-        <input
-          type="number"
-          name="attr3"
-          min="0"
-          max="90"
-          id=""
-          data-testid="attr3-input"
-          value={ cardAttr3 }
-          onChange={ onInputChange }
-        />
+        <label htmlFor="attr1" className="attr">
+          <span>
+            ATK:
+          </span>
+          <input
+            type="number"
+            name="attr1"
+            min="0"
+            max="90"
+            id="attr1"
+            data-testid="attr1-input"
+            value={ cardAttr1 }
+            onChange={ onInputChange }
+          />
+        </label>
+        <label htmlFor="attr2" className="attr">
+          <span>
+            DEF:
+          </span>
+          <input
+            type="number"
+            name="attr2"
+            min="0"
+            max="90"
+            id="attr2"
+            data-testid="attr2-input"
+            value={ cardAttr2 }
+            onChange={ onInputChange }
+          />
+        </label>
+        <label htmlFor="attr3" className="attr">
+          <span>
+            AGI:
+          </span>
+          <input
+            type="number"
+            name="attr3"
+            min="0"
+            max="90"
+            id="attr3"
+            data-testid="attr3-input"
+            value={ cardAttr3 }
+            onChange={ onInputChange }
+          />
+        </label>
         <input
           name="cardImage"
           type="text"
           data-testid="image-input"
           value={ cardImage }
           onChange={ onInputChange }
+          placeholder="Card image url"
         />
         <select
+          id="rarity"
           name="rariti"
-          id=""
           data-testid="rare-input"
           value={ cardRare }
           onChange={ onInputChange }
         >
-          <option value="normal">normal</option>
-          <option value="raro">raro</option>
-          <option value="muito raro">muito raro</option>
+          <option value="Normal" selected>Normal</option>
+          <option value="Rara">Rara</option>
+          <option value="Lendaria">Lendaria</option>
         </select>
         { this.haveTrunfo() }
         <button

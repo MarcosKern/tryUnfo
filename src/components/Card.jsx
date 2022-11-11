@@ -12,6 +12,7 @@ class Card extends React.Component {
       cardImage,
       cardRare,
       cardTrunfo,
+      del,
     } = this.props;
 
     const isTrunfo = () => {
@@ -19,51 +20,79 @@ class Card extends React.Component {
         return (
           <p
             data-testid="trunfo-card"
+            className="superTrunfo"
           >
-            Super Trunfo
+            Trunfo
           </p>
         );
       }
     };
 
     return (
-      <div>
-        <h2
-          data-testid="name-card"
+      <div
+        className={ `cardPreview ${cardRare}` }
+      >
+        <section
+          className="innerCard"
         >
-          { cardName }
-        </h2>
-        <img
-          src={ cardImage }
-          alt={ cardName }
-          data-testid="image-card"
-        />
-        <p
-          data-testid="description-card"
-        >
-          { cardDescription }
-        </p>
-        <p
-          data-testid="attr1-card"
-        >
-          { cardAttr1 }
-        </p>
-        <p
-          data-testid="attr2-card"
-        >
-          { cardAttr2 }
-        </p>
-        <p
-          data-testid="attr3-card"
-        >
-          { cardAttr3 }
-        </p>
-        <p
-          data-testid="rare-card"
-        >
-          { cardRare }
-        </p>
-        { isTrunfo() }
+          <h2
+            data-testid="name-card"
+          >
+            { cardName }
+          </h2>
+          <img
+            src={ cardImage }
+            alt={ cardName }
+            data-testid="image-card"
+          />
+          <p
+            data-testid="description-card"
+            className="description"
+          >
+            { cardDescription }
+          </p>
+          <section
+            className="cardStatus"
+          >
+            <div className="attr">
+              <span>
+                ATK
+              </span>
+              <p
+                data-testid="attr1-card"
+              >
+                { cardAttr1 }
+              </p>
+            </div>
+            <div className="attr">
+              <span>
+                DEF
+              </span>
+              <p
+                data-testid="attr2-card"
+              >
+                { cardAttr2 }
+              </p>
+            </div>
+            <div className="attr">
+              <span>
+                AGI
+              </span>
+              <p
+                data-testid="attr3-card"
+              >
+                { cardAttr3 }
+              </p>
+            </div>
+            <p
+              data-testid="rare-card"
+            >
+              { cardRare }
+            </p>
+          </section>
+          { isTrunfo() }
+          { del }
+        </section>
       </div>
     );
   }
@@ -78,6 +107,7 @@ Card.propTypes = {
   cardImage: PropTypes.string.isRequired,
   cardRare: PropTypes.string.isRequired,
   cardTrunfo: PropTypes.bool.isRequired,
+  del: PropTypes.func.isRequired,
 };
 
 export default Card;

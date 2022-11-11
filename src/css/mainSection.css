@@ -1,0 +1,200 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.createCard {
+  display: flex;
+  height: 100vh;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1em;
+  text-align: center;
+  flex: 1;
+  background-color: #222323;
+  padding: 2em;
+  color: white;
+}
+
+h2 {
+  font-size: 18px;
+}
+
+form input,
+form select,
+form button {
+  text-align: center;
+  height: 30px;
+  border: none;
+}
+
+form textarea {
+  resize: none;
+  padding: .2em;
+  border: none;
+}
+
+form label {
+  display: flex;
+}
+
+form .attr input {
+  flex: 4;
+}
+
+form .attr span {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ddd;
+  color: #222323;
+}
+
+form textarea:placeholder-shown {
+  text-align: center;
+}
+
+.display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: hidden;
+  flex: 1;
+}
+
+.trunfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.preview {
+  background-color: #ddd;
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardPreview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 340px;
+  width: 220px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: #22232390 0px 0px 20px;
+}
+
+.cardPreview img {
+  width: 90%;
+  height: 95px;
+}
+
+.innerCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  height: 90%;
+  overflow: hidden;
+  gap: 10px;
+}
+
+.description {
+  font-size: 12px;
+  max-width: 100%;
+}
+
+.cardStatus {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  font-size: 14px;
+  width: 85%;
+  gap: 5px;
+}
+
+.cardStatus .attr {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  font-size: 10px;
+  padding: 2px;
+  border-radius: 5px;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  justify-content: space-around;
+  padding: 1rem;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 1em;
+  overflow-y: auto;
+  background-color: #ddd;
+}
+
+li {
+  transition: .2s ease-in-out;
+}
+
+.previewShow {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  height: 4em;
+}
+
+header button {
+  height: 30px;
+  font-size: 16px;
+  padding-inline: 3em;
+  border: #222323 solid 1px;
+}
+
+.Normal {
+  background: linear-gradient(45deg, rgba(158,195,218,0.48480463096960924) 0%, rgba(93,115,193,0.8581765557163531) 100%);
+}
+
+.Rara {
+  background: linear-gradient(45deg, rgba(161,193,115,0.48480463096960924) 0%, rgba(69,236,42,0.8581765557163531) 100%);
+}
+
+.Lendaria {
+  background: linear-gradient(-45deg, rgba(251,30,30,0.8581765557163531) 0%, rgba(251,30,30,0.8581765557163531) 40%, rgba(193,104,65,0.48) 50%, rgba(251,30,30,0.8581765557163531) 60%, rgba(251,30,30,0.8581765557163531) 100%);
+  background-size: 300%;
+  animation: lendaria 4s linear infinite;
+}
+
+.superTrunfo {
+  position: absolute;
+}
+
+@keyframes lendaria {
+  from {
+    background-position: -30%;
+  }
+  to {
+    background-position: 130%;
+  }
+}
